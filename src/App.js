@@ -92,7 +92,7 @@ class App extends Component {
         </Menu>
         <div style={{marginTop: "4em"}}>
           <Header as="h1" textAlign="center">To-Do List App</Header>
-          <Grid container>
+          <Grid container divided>
             <Grid.Column width={6}>
               <List divided relaxed selection>
                 {this.state.lists.map((list, index) =>
