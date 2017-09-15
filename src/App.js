@@ -66,6 +66,12 @@ class App extends Component {
     };
   }
 
+  handleSelectedListChange(index) {
+    this.setState(prevState => ({
+      selectedList: prevState.lists[index]
+    }));
+  }
+
   render() {
     return (
       <div>
@@ -90,7 +96,7 @@ class App extends Component {
             <Grid.Column width={6}>
               <List divided relaxed selection>
                 {this.state.lists.map((list, index) =>
-                  <List.Item key={index}>
+                  <List.Item key={index} onClick={(e, d) => this.handleSelectedListChange(index)}>
                     <List.Content>
                       <List.Header>{list.name}</List.Header>
                       <List.Description>Updated: {list.updated} ago</List.Description>
