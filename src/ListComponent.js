@@ -63,6 +63,8 @@ class ListComponent extends Component {
         }
       ]
     };
+
+    this.handleSelectedListChange = this.handleSelectedListChange.bind(this);
   }
 
   handleSelectedListChange(index) {
