@@ -10,6 +10,12 @@ class App extends Component {
     this.state = {
       selectedList: null
     };
+
+    this.handleSelectedListChange = this.handleSelectedListChange.bind(this);
+  }
+
+  handleSelectedListChange(selectedList) {
+    this.setState({selectedList: selectedList});
   }
 
   render() {
@@ -35,10 +41,11 @@ class App extends Component {
           <Grid container divided>
             <Grid.Column width={6}>
               <ListComponent selectedList={this.state.selectedList}
-                             onSelectedListChange={selectedList => this.setState({selectedList: selectedList})}/>
+                             onSelectedListChange={this.handleSelectedListChange}/>
             </Grid.Column>
             <Grid.Column width={10}>
-              <ItemsComponent selectedList={this.state.selectedList}/>
+              <ItemsComponent selectedList={this.state.selectedList}
+                              onSelectedListChange={this.handleSelectedListChange}/>
             </Grid.Column>
           </Grid>
         </div>
