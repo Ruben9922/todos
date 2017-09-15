@@ -34,7 +34,7 @@ class App extends Component {
           <Header as="h1" textAlign="center">To-Do List App</Header>
           <Grid container divided>
             <Grid.Column width={6}>
-              <ListComponent onChange={selectedList => this.setState({selectedList: selectedList})}/>
+              <ListComponent selectedList={this.state.selectedList} onChange={selectedList => this.setState({selectedList: selectedList})}/>
             </Grid.Column>
             <Grid.Column width={10}>
               <ItemsComponent selectedList={this.state.selectedList}/>

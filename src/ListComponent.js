@@ -73,7 +73,8 @@ class ListComponent extends Component {
     return (
       <List divided relaxed selection>
         {this.state.lists.map((list, index) =>
-          <List.Item key={index} onClick={(e, d) => this.handleSelectedListChange(index)}>
+          <List.Item key={index} onClick={(e, d) => this.handleSelectedListChange(index)}
+                     active={this.props.selectedList === list}>
             <List.Content>
               <List.Header>{list.name}</List.Header>
               <List.Description>Updated: {list.updated} ago</List.Description>
