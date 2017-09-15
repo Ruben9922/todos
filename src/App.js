@@ -110,10 +110,7 @@ class App extends Component {
                 <List divided relaxed>
                   {this.state.selectedList.items.map((item, index) =>
                     <List.Item key={index}>
-                      <Checkbox toggle checked={item.done}/>
-                      <List.Content>
-                        <List.Header>{item.name}</List.Header>
-                      </List.Content>
+                      <Checkbox toggle checked={item.done} label={item.name}/>
                     </List.Item>
                   )}
                 </List>
