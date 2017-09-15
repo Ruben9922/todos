@@ -107,13 +107,16 @@ class App extends Component {
             </Grid.Column>
             <Grid.Column width={10}>
               {this.state.selectedList !== null && (
-                <List divided relaxed>
-                  {this.state.selectedList.items.map((item, index) =>
-                    <List.Item key={index}>
-                      <Checkbox toggle checked={item.done} label={item.name}/>
-                    </List.Item>
-                  )}
-                </List>
+                <div>
+                  <Header as="h2">{this.state.selectedList.name}</Header>
+                  <List divided relaxed>
+                    {this.state.selectedList.items.map((item, index) =>
+                      <List.Item key={index}>
+                        <Checkbox toggle checked={item.done} label={item.name}/>
+                      </List.Item>
+                    )}
+                  </List>
+                </div>
               )}
             </Grid.Column>
           </Grid>
