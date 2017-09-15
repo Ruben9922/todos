@@ -66,7 +66,7 @@ class ListComponent extends Component {
   }
 
   handleSelectedListChange(index) {
-    this.props.onChange(this.state.lists[index]);
+    this.props.onSelectedListChange(this.state.lists[index]);
   }
 
   render() {
