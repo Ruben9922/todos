@@ -14,7 +14,6 @@ class ItemsComponent extends Component {
     let updatedItems = this.props.selectedList.items.slice();
     updatedItems.splice(index, 1, updatedItem);
     let updatedList = Object.assign({}, this.props.selectedList, {items: updatedItems});
-    console.log(updatedList);
     this.props.onSelectedListChange(updatedList);
   }
 
