@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import {Checkbox, Header, List} from "semantic-ui-react";
 import "./ItemsComponent.css";
 
+// TODO: Give each item an ID & move done items to bottom
 class ItemsComponent extends Component {
   constructor(props) {
     super(props);
