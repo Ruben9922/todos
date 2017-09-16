@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import {Checkbox, Header, List} from "semantic-ui-react";
+import "./ItemsComponent.css";
 
 class ItemsComponent extends Component {
   constructor(props) {
@@ -33,7 +34,7 @@ class ItemsComponent extends Component {
         <List divided relaxed>
           {this.props.selectedList.items.map((item, index) =>
             <List.Item key={index}>
-              <Checkbox toggle checked={item.done} label={item.name}
+              <Checkbox toggle checked={item.done} label={<label className={item.done && "done"}>{item.name}</label>}
                         onChange={(e, d) => this.handleDoneChanged(e, d, item, index)}/>
             </List.Item>
           )}
