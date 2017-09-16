@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {List} from 'semantic-ui-react';
 
+// TODO: Sort out "Updated: ... ago"
 class ListComponent extends Component {
   constructor(props) {
     super(props);
