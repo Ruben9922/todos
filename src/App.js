@@ -78,7 +78,9 @@ class App extends Component {
   }
 
   handleSelectedListChange(selectedList) {
-    this.setState({selectedList: selectedList});
+    this.setState({
+      selectedList
+    });
   }
 
   render() {
