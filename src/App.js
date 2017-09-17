@@ -94,7 +94,7 @@ class App extends Component {
                 <Icon name="arrow left"/>
                 Back to Main Website
               </Menu.Item>
-              <Menu.Item link href="https://github.com/Ruben9922/wordsearch">
+              <Menu.Item link href="https://github.com/Ruben9922/todos">
                 <Icon name="github"/>
                 GitHub
               </Menu.Item>
