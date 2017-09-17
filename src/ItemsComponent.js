@@ -63,7 +63,7 @@ class ItemsComponent extends Component {
           <Form.Group inline>
             <Form.Input label="New item:" placeholder="Buy cookies" name="newItemName" value={this.state.newItemName}
                         onChange={this.handleChange}/>
-            <Form.Button>Add</Form.Button>
+            <Form.Button primary>Add</Form.Button>
           </Form.Group>
         </Form>
       </div>
