@@ -64,10 +64,10 @@ class App extends Component {
           ]
         }
       ],
-      selectedList: null
+      selectedIndex: null
     };
 
-    this.handleSelectedListChange = this.handleSelectedListChange.bind(this);
+    this.handleSelectedIndexChange = this.handleSelectedIndexChange.bind(this);
     this.handleListsChange = this.handleListsChange.bind(this);
   }
 
@@ -77,9 +77,9 @@ class App extends Component {
     });
   }
 
-  handleSelectedListChange(selectedList) {
+  handleSelectedIndexChange(selectedList) {
     this.setState({
-      selectedList
+      selectedIndex: selectedList
     });
   }
 
@@ -105,13 +105,12 @@ class App extends Component {
           <Header as="h1" textAlign="center">To-Do List App</Header>
           <Grid container divided>
             <Grid.Column width={6}>
-              <ListComponent lists={this.state.lists} selectedList={this.state.selectedList}
-                             onSelectedListChange={this.handleSelectedListChange}/>
+              <ListComponent lists={this.state.lists} selectedIndex={this.state.selectedIndex}
+                             onSelectedIndexChange={this.handleSelectedIndexChange}/>
             </Grid.Column>
             <Grid.Column width={10}>
-              <ItemsComponent lists={this.state.lists} selectedList={this.state.selectedList}
-                              onListsChange={this.handleListsChange}
-                              onSelectedListChange={this.handleSelectedListChange}/>
+              <ItemsComponent lists={this.state.lists} selectedIndex={this.state.selectedIndex}
+                              onListsChange={this.handleListsChange}/>
             </Grid.Column>
           </Grid>
         </div>

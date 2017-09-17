@@ -3,22 +3,12 @@ import {List} from 'semantic-ui-react';
 
 // TODO: Sort out "Updated: ... ago"
 class ListComponent extends Component {
-  constructor(props) {
-    super(props);
-
-    this.handleSelectedListChange = this.handleSelectedListChange.bind(this);
-  }
-
-  handleSelectedListChange(index) {
-    this.props.onSelectedListChange(this.props.lists[index]);
-  }
-
   render() {
     return (
       <List divided relaxed selection>
         {this.props.lists.map((list, index) =>
-          <List.Item key={index} onClick={(e, d) => this.handleSelectedListChange(index)}
-                     active={this.props.selectedList === list}>
+          <List.Item key={index} onClick={(e, d) => this.props.onSelectedIndexChange(index)}
+                     active={this.props.selectedIndex === index}>
             <List.Content>
               <List.Header>{list.name}</List.Header>
               <List.Description>Updated: {list.updated} ago</List.Description>
