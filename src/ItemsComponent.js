@@ -45,6 +45,7 @@ class ItemsComponent extends Component {
 
   render() {
     const {lists, selectedIndex} = this.props;
+    const {newItemName} = this.state;
     const selectedList = lists[selectedIndex];
 
     return selectedIndex !== null && (
@@ -61,9 +62,9 @@ class ItemsComponent extends Component {
         <Divider/>
         <Form onSubmit={this.handleAddItem}>
           <Form.Group inline>
-            <Form.Input label="New item:" placeholder="Buy cookies" name="newItemName" value={this.state.newItemName}
+            <Form.Input label="New item:" placeholder="Buy cookies" name="newItemName" value={newItemName}
                         onChange={this.handleChange}/>
-            <Form.Button primary>Add</Form.Button>
+            <Form.Button primary disabled={newItemName === ""}>Add</Form.Button>
           </Form.Group>
         </Form>
       </div>
