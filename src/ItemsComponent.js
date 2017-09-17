@@ -14,7 +14,8 @@ class ItemsComponent extends Component {
 
     this.handleDoneChanged = this.handleDoneChanged.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.handleAddItem = this.handleAddItem.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.addItem = this.addItem.bind(this);
   }
 
   handleDoneChanged(event, {checked}, index) {
@@ -33,7 +34,15 @@ class ItemsComponent extends Component {
     });
   }
 
-  handleAddItem() {
+  handleSubmit() {
+    this.addItem();
+
+    this.setState({
+      newItemName: ""
+    });
+  }
+
+  addItem() {
     const {lists, selectedIndex} = this.props;
     const {newItemName} = this.state;
 
@@ -60,7 +69,7 @@ class ItemsComponent extends Component {
           )}
         </List>
         <Divider/>
-        <Form onSubmit={this.handleAddItem}>
+        <Form onSubmit={this.handleSubmit}>
           <Form.Group inline>
             <Form.Input label="New item:" placeholder="Buy cookies" name="newItemName" value={newItemName}
                         onChange={this.handleChange}/>
