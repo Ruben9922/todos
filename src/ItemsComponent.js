@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Checkbox, Divider, Form, Header, List} from "semantic-ui-react";
+import {Checkbox, Divider, Form, Header, Input, List} from "semantic-ui-react";
 import update from "immutability-helper";
 import "./ItemsComponent.css";
 
@@ -9,13 +9,15 @@ class ItemsComponent extends Component {
     super(props);
 
     this.state = {
-      newItemName: ""
+      newItemName: "",
+      edit: false
     };
 
     this.handleDoneChanged = this.handleDoneChanged.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.addItem = this.addItem.bind(this);
+    this.handleItemNameChanged = this.handleItemNameChanged.bind(this);
   }
 
   handleDoneChanged(event, {checked}, index) {
@@ -28,9 +30,9 @@ class ItemsComponent extends Component {
     }
   }
 
-  handleChange(event, {name, value}) {
+  handleChange(event, data) {
     this.setState({
-      [name]: value
+      [data.name]: data.type === "checkbox" ? data.checked : data.value
     });
   }
 
@@ -52,20 +54,39 @@ class ItemsComponent extends Component {
     }
   }
 
+  handleItemNameChanged(event, {value}, index) {
+    const {lists, selectedIndex} = this.props;
+
+    let updatedLists = update(lists, {[selectedIndex]: {items: {[index]: {name: {$set: value}}}}});
+    this.props.onListsChange(updatedLists);
+  }
+
   render() {
     const {lists, selectedIndex} = this.props;
-    const {newItemName} = this.state;
+    const {newItemName, edit} = this.state;
     const selectedList = lists[selectedIndex];
 
     return selectedIndex !== null && (
       <div>
         <Header as="h2">{selectedList.name}</Header>
+        <Checkbox type="checkbox" toggle checked={edit} label="Edit" name="edit" onChange={this.handleChange}/>
+        <Divider/>
         <List divided relaxed>
-          {selectedList.items.map((item, index) =>
-            <List.Item key={index}>
-              <Checkbox toggle checked={item.done} label={<label className={item.done && "done"}>{item.name}</label>}
-                        onChange={(e, d) => this.handleDoneChanged(e, d, index)}/>
-            </List.Item>
+          {selectedList.items.map((item, index) => {
+              let checkboxElement = edit ? (
+                <div>
+                  <Checkbox toggle checked={item.done} onChange={(e, d) => this.handleDoneChanged(e, d, index)}/>
+                  <Input value={item.name} placeholder={"Item #" + (index + 1)}
+                         onChange={(e, d) => this.handleItemNameChanged(e, d, index)}/>
+                </div>
+              ) : (
+                <Checkbox toggle checked={item.done} label={<label className={item.done && "done"}>{item.name}</label>}
+                          onChange={(e, d) => this.handleDoneChanged(e, d, index)}/>
+              );
+              return (<List.Item key={index}>
+                {checkboxElement}
+              </List.Item>);
+            }
           )}
         </List>
         <Divider/>
