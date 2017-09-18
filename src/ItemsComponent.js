@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Checkbox, Divider, Form, Header, Input, List} from "semantic-ui-react";
+import {Checkbox, Divider, Form, Grid, Header, Input, List} from "semantic-ui-react";
 import update from "immutability-helper";
 import "./ItemsComponent.css";
 
@@ -73,19 +73,25 @@ class ItemsComponent extends Component {
         <Divider/>
         <List divided relaxed>
           {selectedList.items.map((item, index) => {
-              let checkboxElement = edit ? (
-                <div>
+            let listItemChild = edit ? (
+              <Grid verticalAlign="middle">
+                <Grid.Column width={2}>
                   <Checkbox toggle checked={item.done} onChange={(e, d) => this.handleDoneChanged(e, d, index)}/>
+                </Grid.Column>
+                <Grid.Column width={14}>
                   <Input value={item.name} placeholder={"Item #" + (index + 1)}
                          onChange={(e, d) => this.handleItemNameChanged(e, d, index)}/>
-                </div>
+                </Grid.Column>
+              </Grid>
               ) : (
                 <Checkbox toggle checked={item.done} label={<label className={item.done && "done"}>{item.name}</label>}
                           onChange={(e, d) => this.handleDoneChanged(e, d, index)}/>
               );
-              return (<List.Item key={index}>
-                {checkboxElement}
-              </List.Item>);
+            return (
+              <List.Item key={index}>
+                {listItemChild}
+              </List.Item>
+            );
             }
           )}
         </List>
