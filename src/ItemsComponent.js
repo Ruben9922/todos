@@ -10,7 +10,8 @@ class ItemsComponent extends Component {
 
     this.state = {
       newItemName: "",
-      edit: false
+      edit: false,
+      placeholder: ItemsComponent.choosePlaceholder()
     };
 
     this.handleDoneChanged = this.handleDoneChanged.bind(this);
@@ -36,12 +37,9 @@ class ItemsComponent extends Component {
     });
   }
 
-  handleSubmit() {
-    this.addItem();
-
-    this.setState({
-      newItemName: ""
-    });
+  static choosePlaceholder() {
+    const placeholders = ["Buy cookies", "Order pizza", "Do coding"];
+    return placeholders[Math.floor(Math.random() * placeholders.length)];
   }
 
   addItem() {
@@ -61,9 +59,18 @@ class ItemsComponent extends Component {
     this.props.onListsChange(updatedLists);
   }
 
+  handleSubmit() {
+    this.addItem();
+
+    this.setState({
+      newItemName: "",
+      placeholder: ItemsComponent.choosePlaceholder()
+    });
+  }
+
   render() {
     const {lists, selectedIndex} = this.props;
-    const {newItemName, edit} = this.state;
+    const {newItemName, edit, placeholder} = this.state;
     const selectedList = lists[selectedIndex];
 
     return selectedIndex !== null && (
@@ -101,7 +108,7 @@ class ItemsComponent extends Component {
         <Segment inverted>
           <Form inverted onSubmit={this.handleSubmit}>
             <Form.Group inline>
-              <Form.Input label="New item:" placeholder="Buy cookies" name="newItemName" value={newItemName}
+              <Form.Input label="New item:" placeholder={placeholder} name="newItemName" value={newItemName}
                           onChange={this.handleChange}/>
               <Form.Button primary disabled={newItemName === ""}>Add</Form.Button>
             </Form.Group>
