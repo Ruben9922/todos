@@ -18,6 +18,7 @@ class ItemsComponent extends Component {
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.addItem = this.addItem.bind(this);
+    this.removeItem = this.removeItem.bind(this);
     this.handleItemNameChanged = this.handleItemNameChanged.bind(this);
   }
 
@@ -48,6 +49,15 @@ class ItemsComponent extends Component {
 
     if (selectedIndex !== null) {
       let updatedLists = update(lists, {[selectedIndex]: {items: {$push: [{name: newItemName, done: false}]}}});
+      this.props.onListsChange(updatedLists);
+    }
+  }
+
+  removeItem(index) {
+    const {lists, selectedIndex} = this.props;
+
+    if (selectedIndex !== null) {
+      let updatedLists = update(lists, {[selectedIndex]: {items: {$splice: [[index, 1]]}}});
       this.props.onListsChange(updatedLists);
     }
   }
@@ -85,12 +95,13 @@ class ItemsComponent extends Component {
           {selectedList.items.map((item, index) => {
             let listItemChild = edit ? (
               <Grid verticalAlign="middle">
-                <Grid.Column width={2}>
+                <Grid.Column width={16}>
                   <Checkbox toggle checked={item.done} onChange={(e, d) => this.handleDoneChanged(e, d, index)}/>
-                </Grid.Column>
-                <Grid.Column width={14}>
                   <Input value={item.name} placeholder={"Item #" + (index + 1)}
+                         style={{paddingLeft: "10px", paddingRight: "10px"}}
                          onChange={(e, d) => this.handleItemNameChanged(e, d, index)}/>
+                  <Icon link name="remove" color="red" style={{paddingLeft: "0px", paddingRight: "0px"}}
+                        onClick={index => this.removeItem(index)}/>
                 </Grid.Column>
               </Grid>
               ) : (
