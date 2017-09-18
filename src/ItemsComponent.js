@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Checkbox, Divider, Form, Grid, Header, Input, List} from "semantic-ui-react";
+import {Checkbox, Form, Grid, Header, Input, List, Segment} from "semantic-ui-react";
 import update from "immutability-helper";
 import "./ItemsComponent.css";
 
@@ -69,8 +69,11 @@ class ItemsComponent extends Component {
     return selectedIndex !== null && (
       <div>
         <Header as="h2">{selectedList.name}</Header>
-        <Checkbox type="checkbox" toggle checked={edit} label="Edit" name="edit" onChange={this.handleChange}/>
-        <Divider/>
+        <Segment inverted>
+          <Form inverted>
+            <Form.Checkbox type="checkbox" checked={edit} label="Edit" name="edit" onChange={this.handleChange}/>
+          </Form>
+        </Segment>
         <List divided relaxed>
           {selectedList.items.map((item, index) => {
             let listItemChild = edit ? (
@@ -95,14 +98,15 @@ class ItemsComponent extends Component {
             }
           )}
         </List>
-        <Divider/>
-        <Form onSubmit={this.handleSubmit}>
-          <Form.Group inline>
-            <Form.Input label="New item:" placeholder="Buy cookies" name="newItemName" value={newItemName}
-                        onChange={this.handleChange}/>
-            <Form.Button primary disabled={newItemName === ""}>Add</Form.Button>
-          </Form.Group>
-        </Form>
+        <Segment inverted>
+          <Form inverted onSubmit={this.handleSubmit}>
+            <Form.Group inline>
+              <Form.Input label="New item:" placeholder="Buy cookies" name="newItemName" value={newItemName}
+                          onChange={this.handleChange}/>
+              <Form.Button primary disabled={newItemName === ""}>Add</Form.Button>
+            </Form.Group>
+          </Form>
+        </Segment>
       </div>
     );
   }
