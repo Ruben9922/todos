@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import {Checkbox, Form, Grid, Header, Input, List, Segment} from "semantic-ui-react";
+import {Button, Checkbox, Form, Grid, Header, Icon, Input, List, Segment} from "semantic-ui-react";
 import update from "immutability-helper";
 import "./ItemsComponent.css";
 
@@ -110,7 +110,14 @@ class ItemsComponent extends Component {
             <Form.Group inline>
               <Form.Input label="New item:" placeholder={placeholder} name="newItemName" value={newItemName}
                           onChange={this.handleChange}/>
-              <Form.Button primary disabled={newItemName === ""}>Add</Form.Button>
+              <Form.Button primary disabled={newItemName === ""} animated="fade">
+                <Button.Content visible>
+                  <Icon name="add"/>
+                </Button.Content>
+                <Button.Content hidden>
+                  Add
+                </Button.Content>
+              </Form.Button>
             </Form.Group>
           </Form>
         </Segment>
